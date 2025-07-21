@@ -478,13 +478,6 @@ save_performance_with_weights_plot(
 import subprocess
 from datetime import datetime
 
-
-plot_name = f"latest.png"
-
-# Rename and move plot
-import shutil
-shutil.copy("D:\\Quant\\daily-trading-plots\\plot.png", plot_name)
-
 # Git commands
 subprocess.run(["git", "add", "."], check=True)
 subprocess.run(["git", "commit", "-m", f"Add plot"], check=True)
