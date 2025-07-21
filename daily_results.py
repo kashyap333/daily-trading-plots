@@ -488,7 +488,7 @@ if not os.path.exists(plot_path):
     raise FileNotFoundError(f"{plot_path} not found!")
 
 # Stage only the plot (forcefully in case it's ignored)
-subprocess.run(["git", "add", "-f", plot_path], cwd=repo_path, check=True)
+subprocess.run(["git", "add", "."])
 
 # Optional: also add any modified code (like daily_results.py)
 subprocess.run(["git", "add", "."], cwd=repo_path, check=True)
