@@ -490,9 +490,5 @@ if not os.path.exists(plot_path):
 # Stage only the plot (forcefully in case it's ignored)
 subprocess.run(["git", "add", "."])
 
-# Optional: also add any modified code (like daily_results.py)
-subprocess.run(["git", "add", "."], cwd=repo_path, check=True)
-
-
-subprocess.run(["git", "commit", "-m", "Add plot"], cwd=repo_path, check=True)
-subprocess.run(["git", "push"], cwd=repo_path, check=True)
+subprocess.run(["git", "commit", "-m", "Add plot"])
+subprocess.run(["git", "push"])
