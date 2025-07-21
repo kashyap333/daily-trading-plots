@@ -468,17 +468,31 @@ combined_weights, signals = compute_combined_weights_for_date(df, '2025-01-01')
 
 returns, metrics = backtest_metrics_close_to_close(df, combined_weights, allow_short=True)
 
+filename="D:\\Quant\\daily-trading-plots\\plot.png"
+
 save_performance_with_weights_plot(
     portfolio_returns=returns,
     weights_df=combined_weights,
-    filename="D:\\Quant\\daily-trading-plots\\plot.png",
+    filename=filename,
     allow_short=False
 )
 
 import subprocess
 from datetime import datetime
 
-# Git commands
-subprocess.run(["git", "add", "."], check=True)
-subprocess.run(["git", "commit", "-m", f"Add plot"], check=True)
-subprocess.run(["git", "push"], check=True)
+repo_path = "D:\\Quant\\daily-trading-plots"
+plot_path = os.path.join(repo_path, "plot.png")
+
+# Ensure file exists
+if not os.path.exists(plot_path):
+    raise FileNotFoundError(f"{plot_path} not found!")
+
+# Stage only the plot (forcefully in case it's ignored)
+subprocess.run(["git", "add", "-f", plot_path], cwd=repo_path, check=True)
+
+# Optional: also add any modified code (like daily_results.py)
+subprocess.run(["git", "add", "."], cwd=repo_path, check=True)
+
+
+subprocess.run(["git", "commit", "-m", "Add plot"], cwd=repo_path, check=True)
+subprocess.run(["git", "push"], cwd=repo_path, check=True)
